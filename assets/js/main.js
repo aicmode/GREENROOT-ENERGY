@@ -81,8 +81,55 @@ if ("IntersectionObserver" in window) {
   document.querySelectorAll(".animated-number").forEach((element) => {
     numberObserver.observe(element);
   });
+
+  const chartObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("active");
+        chartObserver.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.35 }
+  );
+
+  document.querySelectorAll("[data-chart]").forEach((element) => {
+    chartObserver.observe(element);
+  });
 } else {
   document.querySelectorAll(".reveal").forEach((element) => {
     element.classList.add("visible");
+  });
+  document.querySelectorAll("[data-chart]").forEach((element) => {
+    element.classList.add("active");
+  });
+}
+
+const contactForm = document.querySelector(".contact-form");
+const successModal = document.querySelector("#contact-success");
+const successClose = document.querySelector(".success-close");
+
+const closeSuccessModal = () => {
+  successModal?.classList.remove("open");
+  successModal?.setAttribute("aria-hidden", "true");
+};
+
+if (contactForm && successModal) {
+  contactForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    successModal.classList.add("open");
+    successModal.setAttribute("aria-hidden", "false");
+    successClose?.focus();
+    contactForm.reset();
+  });
+
+  successClose?.addEventListener("click", closeSuccessModal);
+
+  successModal.addEventListener("click", (event) => {
+    if (event.target === successModal) closeSuccessModal();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeSuccessModal();
   });
 }

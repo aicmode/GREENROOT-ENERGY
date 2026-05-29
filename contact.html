@@ -35,7 +35,7 @@
           <span class="eyebrow">Contact Form</span>
           <h2>Contact Form</h2>
           <p>下記フォームよりお問い合わせください。担当チームが内容を確認し、通常二営業日以内にご連絡いたします。</p>
-          <form class="form-grid" action="#" method="post">
+          <form class="form-grid contact-form" action="#" method="post">
             <div class="field">
               <label for="name">Full Name</label>
               <input id="name" name="name" type="text" autocomplete="name" required>
@@ -88,6 +88,17 @@
       </div>
     </section>
   </main>
+
+  <div class="success-modal" id="contact-success" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="success-title">
+    <div class="success-dialog" role="document">
+      <button class="success-close" type="button" aria-label="Close message">&times;</button>
+      <span class="success-mark" aria-hidden="true">✓</span>
+      <p class="eyebrow">Inquiry Received</p>
+      <h2 id="success-title">Thank You</h2>
+      <p>Thank you for contacting GREENROOT ENERGY.</p>
+      <p>Our team will review your inquiry and respond as soon as possible.</p>
+    </div>
+  </div>
 
   <footer class="site-footer">
     <div class="container footer-grid">
